@@ -14,7 +14,7 @@ install-deps:
 	@echo "Building Go module..."
 	@cd golang && go mod tidy
 	@echo "Building Kotlin project..."
-	@cd kotlin && ./gradlew build -x test
+	@cd kotlin && (./gradlew build -x test || gradle build -x test)
 
 benchmark: setup
 	@echo "\n=== Running I/O Performance Benchmark ==="
@@ -30,7 +30,7 @@ run-go:
 
 run-kotlin:
 	@echo "\n--- Running Kotlin Test ---"
-	@cd kotlin && ./gradlew run --args="10" --quiet
+	@cd kotlin && (./gradlew run --args="10" --quiet || gradle run --args="10" --quiet)
 
 test-individual: setup
 	@echo "\n=== Testing Individual Implementations ==="
@@ -46,11 +46,11 @@ clean:
 	@rm -f data/*.out
 	@rm -f data/test_*.txt
 	@rm -rf results/
-	@cd kotlin && ./gradlew clean
+	@cd kotlin && (./gradlew clean || gradle clean)
 
 test-kotlin:
 	@echo "\n--- Running Kotlin Tests ---"
-	@cd kotlin && ./gradlew test
+	@cd kotlin && (./gradlew test || gradle test)
 
 clean-all: clean
 	@echo "Removing virtual environment..."
