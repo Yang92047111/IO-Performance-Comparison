@@ -22,14 +22,23 @@ benchmark: setup
 
 run-python:
 	@echo "\n--- Running Python Test ---"
-	@./venv/bin/python python/io_benchmark.py 10
+	@echo "Creating 10MB test file..."
+	@mkdir -p data
+	@python3 -c "with open('data/test_10mb.txt', 'wb') as f: f.write(b'A' * (10 * 1024 * 1024))"
+	@python3 python/io_benchmark.py 10
 
 run-go:
 	@echo "\n--- Running Golang Test ---"
+	@echo "Creating 10MB test file..."
+	@mkdir -p data
+	@python3 -c "with open('data/test_10mb.txt', 'wb') as f: f.write(b'A' * (10 * 1024 * 1024))"
 	@cd golang && go run main.go 10
 
 run-kotlin:
 	@echo "\n--- Running Kotlin Test ---"
+	@echo "Creating 10MB test file..."
+	@mkdir -p data
+	@python3 -c "with open('data/test_10mb.txt', 'wb') as f: f.write(b'A' * (10 * 1024 * 1024))"
 	@cd kotlin && (./gradlew run --args="10" --quiet || gradle run --args="10" --quiet)
 
 test-individual: setup

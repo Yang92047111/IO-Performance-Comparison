@@ -19,8 +19,8 @@ type BenchmarkResult struct {
 }
 
 func benchmarkIO(fileSizeMB int) (*BenchmarkResult, error) {
-	inputPath := fmt.Sprintf("data/test_%dmb.txt", fileSizeMB)
-	outputPath := fmt.Sprintf("data/test_%dmb.go.out", fileSizeMB)
+	inputPath := fmt.Sprintf("../data/test_%dmb.txt", fileSizeMB)
+	outputPath := fmt.Sprintf("../data/test_%dmb.go.out", fileSizeMB)
 
 	// Check if input file exists
 	if _, err := os.Stat(inputPath); os.IsNotExist(err) {
